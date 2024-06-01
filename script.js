@@ -62,33 +62,58 @@ class Stopwatch {
     
 }
 
-/* main */
-const stopwatch = new Stopwatch();
-let stopwatchIsRunning = false;
-
+// DOM elements
 const startStopButton = document.getElementById('start-stop-button');
 const resetLapButton = document.getElementById('reset-lap-button');
+const lapTimesContainer = document.querySelector('.lap-times-container');
 
+
+/* main */
+
+// initialize stopwatch
+const stopwatch = new Stopwatch();
+let stopwatchIsRunning = false;
+let lapCounter = 1;
 stopwatch.resetStopwatch();
 
+// event listeners
 startStopButton.addEventListener('click', () => {
     if (stopwatchIsRunning) {
         stopwatch.stopStopwatch();
         startStopButton.innerText = 'Start';
         startStopButton.style.backgroundColor = 'lightgreen';
+        resetLapButton.innerText = 'Reset';
     } else {
         stopwatch.startStopwatch();
         startStopButton.innerText = 'Stop';
         startStopButton.style.backgroundColor = 'crimson';
-        
+        resetLapButton.innerText = 'Lap';
     }
 
     stopwatchIsRunning = !stopwatchIsRunning;
 });
 
 resetLapButton.addEventListener('click', () => {
-    stopwatch.resetStopwatch();
+    if (stopwatchIsRunning) {
+        addLapTime();
+    } else {
+        stopwatch.resetStopwatch();
+        lapTimesContainer.innerHTML = '<hr class="lap-time-divider">';
+    }
 });
 
+const addLapTime = () => {
+    const minutes = String(stopwatch.minutes).padStart(2, '0');
+    const seconds = String(stopwatch.seconds).padStart(2, '0');
+    const centiseconds = String(stopwatch.centiseconds).padStart(2, '0');
+    
 
+    lapTimesContainer.innerHTML += `<div class="lap-time">
+                                        <span>Lap ${lapCounter}</span>
+                                        <span>${minutes}:${seconds}.${centiseconds}</span>
+                                    </div>
+                                    <hr class="lap-time-divider">`;
+
+    lapCounter++;
+};
 

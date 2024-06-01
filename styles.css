@@ -22,6 +22,7 @@ body {
 .stopwatch-buttons-container {
     display: flex;
     justify-content: space-around;
+    margin-bottom: 2.25rem;
 }
 
 .stopwatch-buttons-container button {
@@ -34,6 +35,36 @@ body {
 
 #start-stop-button {
     background-color: lightgreen;
+}
+
+.lap-times-container {
+    width: 100%;
+    height: 20rem;
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: auto;
+}
+
+.lap-time {
+    width: 90%;
+    height: 3rem;
+    flex-shrink: 0;
+    font-size: 2rem;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+
+.lap-time span {
+    color: white;
+}
+
+.lap-time-divider {
+    width: 95%;
 }
 
 
